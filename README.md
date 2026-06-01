@@ -1,70 +1,209 @@
-# Getting Started with Create React App
+# Registration Form Validation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive React.js registration form that validates Name, Email, and Password fields in real time. The submit button stays disabled until all fields are valid, then shows a success message and clears the form after submission.
 
-## Available Scripts
+## Project Objective
 
-In the project directory, you can run:
+Create a professional registration form using React functional components, `useState`, controlled components, JavaScript validation, and CSS styling.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Name, Email, and Password inputs
+- Real-time validation while typing
+- Regex-based email validation
+- Disabled submit button until the form is valid
+- Red border for invalid fields
+- Green border for valid fields
+- Success message after valid submission
+- Form reset after successful submission
+- Password show/hide toggle
+- Password character counter
+- Labels, `aria-invalid`, `aria-describedby`, and live feedback for accessibility
+- Responsive centered card layout for desktop and mobile
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+```text
+src/
+├── App.js
+├── App.css
+├── index.js
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Additional Create React App files are kept for normal development and testing.
 
-### `npm run build`
+## Source Code Files
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `src/App.js`: Main React component, form state, validation functions, event handlers, and JSX.
+- `src/App.css`: Complete responsive styling for the form, card, inputs, errors, success state, and buttons.
+- `src/index.js`: React app entry point.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Validation Logic
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The form uses controlled components, so every input value is stored in React state through `useState`.
 
-### `npm run eject`
+Validation rules are handled by `validateField(fieldName, value)`:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Name is valid only when it is not empty after trimming spaces.
+- Email is valid only when it matches the regex pattern:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Password is valid only when it has at least 6 characters.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`validateForm(formValues)` runs all field validations together. The submit button uses this derived value:
 
-## Learn More
+```js
+const isFormValid = Object.values(formErrors).every((error) => error === '');
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If any error message exists, the button remains disabled.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Step-by-Step Setup Instructions
 
-### Code Splitting
+1. Open the project folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+cd /Users/thamizhvaanand/Desktop/registration-form
+```
 
-### Analyzing the Bundle Size
+2. Install dependencies if needed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm install
+```
 
-### Making a Progressive Web App
+3. Start the development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm start
+```
 
-### Advanced Configuration
+4. Open the app in the browser:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```text
+http://localhost:3000
+```
 
-### Deployment
+5. Create a production build:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm run build
+```
 
-### `npm run build` fails to minify
+6. Run tests:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm test -- --watchAll=false
+```
+
+## College Submission Documentation
+
+### Title
+
+Registration Form Validation using React.js
+
+### Aim
+
+To create a responsive registration form that validates user input in real time using React.js functional components, hooks, and JavaScript validation.
+
+### Technologies Used
+
+- React.js
+- JavaScript
+- HTML JSX
+- CSS
+- Create React App
+
+### Modules
+
+- Form UI module
+- State management module using `useState`
+- Validation module using JavaScript functions
+- Accessibility and feedback module
+- Responsive CSS styling module
+
+### Algorithm
+
+1. Initialize form state for name, email, and password.
+2. Initialize error state for each field.
+3. Update form state whenever the user types.
+4. Validate the changed field immediately.
+5. Display the related error message below the field.
+6. Apply red border for invalid input and green border for valid input.
+7. Check whether all fields are valid.
+8. Keep the submit button disabled until all validations pass.
+9. On successful submit, show a success message.
+10. Clear the form and reset validation state.
+
+### Expected Output
+
+The user can submit the registration form only after entering a non-empty name, a valid email address, and a password with at least 6 characters. Invalid fields show clear error messages and styling.
+
+### Conclusion
+
+This project demonstrates how React controlled components, `useState`, event handling, regex validation, conditional rendering, and responsive CSS can be combined to build a clean and accessible registration form.
+
+## Viva Questions and Answers
+
+### 1. What is React?
+
+React is a JavaScript library used to build user interfaces using reusable components.
+
+### 2. What is a functional component?
+
+A functional component is a JavaScript function that returns JSX to render UI.
+
+### 3. What is `useState`?
+
+`useState` is a React Hook used to add and update state inside functional components.
+
+### 4. What is a controlled component?
+
+A controlled component is a form element whose value is controlled by React state.
+
+### 5. Why are controlled components useful?
+
+They make form data easier to validate, reset, submit, and synchronize with UI state.
+
+### 6. What is real-time validation?
+
+Real-time validation checks input immediately as the user types, instead of waiting until final submission.
+
+### 7. What is regex?
+
+Regex, or regular expression, is a pattern used to match and validate strings.
+
+### 8. Why is regex used for email validation?
+
+Regex helps check whether the email follows a basic pattern such as `name@example.com`.
+
+### 9. What is event handling in React?
+
+Event handling means responding to user actions such as typing, clicking, focusing, or submitting a form.
+
+### 10. What does `onChange` do?
+
+`onChange` runs whenever an input value changes. In this project, it updates state and validates the field.
+
+### 11. What does `onSubmit` do?
+
+`onSubmit` runs when the form is submitted. It prevents default page reload, validates the form, and processes valid data.
+
+### 12. Why is `event.preventDefault()` used?
+
+It prevents the browser from reloading the page during form submission.
+
+### 13. How is the submit button disabled?
+
+The button uses the `disabled` attribute based on the `isFormValid` value.
+
+### 14. How are error messages displayed?
+
+Error messages are conditionally rendered below each field when validation fails.
+
+### 15. How is accessibility supported?
+
+The form uses labels, `aria-invalid`, `aria-describedby`, `role="alert"`, and `aria-live` so assistive technologies can understand the form state.
